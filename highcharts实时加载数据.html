@@ -1,0 +1,153 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Highcharts Example</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    <input type="button" value="点击返回" id="btn2"/>
+  <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+<script src="${ctxPath}/static/code/modules/exporting.js"></script>
+<script src="${ctxPath}/static/code/modules/export-data.js"></script>
+ 
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script src="./node_modules/light-sdk/dist/index.umd.js"></script>
+<script type="text/javascript">
+   document.getElementById("btn2").onclick=function () {
+    params={
+        "number":""  
+        }
+        LightSDK.native.back(params,function(res){
+            console.log(res);
+            alert(res)
+        });
+  };
+    Highcharts.setOptions({
+        global: {
+            useUTC: false
+        }
+    });
+    var max=6;
+    Highcharts.chart('container', {
+        chart: {
+            type: 'spline',
+            animation: Highcharts.svg, 
+            events: {
+                load: function() {
+                    var series = this.series;
+                    var loadData = function() {
+                        // $.getJSON("http://localhost:8089/echarts/vintage", function(data) {
+                                              var data = [],
+                            time = (new Date()).getTime(),
+                            i;
+                          for (i = -19; i <= 0; i += 1) {
+                            data.push({
+                              x: time + i * 1000,
+                              y: Math.random()
+                            });
+                          }
+                            for (var k = 0; k < series.length; k++) {
+                                console.info(data.length)
+                                for (var j = 0; j < data[k].length; j++) {
+                                    var point = data[k][j];
+                                    console.info(point)
+                                    console.info(point[0])
+                                    console.info(point[1])
+                                    var isShift = series[k].data.length >= max;
+                                    console.log("series " + k + ".data.length=" + series[k].data.length);
+                                    var lastTime = 0;
+                                    // if (series[k].data.length > 0)
+                                        // lastTime = series[k].data[series[k].data.length - 1].x;
+                                    // if (point[0] > lastTime)
+                                        series[k].addPoint([point[0],point[1]], true, isShift);
+                                }
+                            }
+                        // })
+                    };
+                    loadData();
+                    setInterval(loadData, 1000);
+                }
+            }
+        },
+        title: {
+            text: '访问量实时监控'
+        },
+        xAxis: [
+            {
+                type: 'datetime',
+                tickPixelInterval:60
+            }
+        ],
+        yAxis: [
+            {
+                title: {
+                    text: '总请求/分钟',
+                    style: {
+                        color: '#3E576F'
+                    }
+                }
+            }
+        ],
+        plotOptions: {
+            spline: {
+                marker:{
+                    enabled: false,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            symbol: 'circle',
+                            radius: 5,
+                            lineWidth: 1
+                        }
+                    }
+                }
+            }
+        },
+        tooltip: {
+            formatter: function() {
+                return '<b>' + this.series.name + '</b><br/>' +
+                    Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                    Highcharts.numberFormat(this.y, 2);
+            }
+        },
+        legend: {
+            enabled: true
+        },
+        exporting: {
+            enabled: false
+        },
+        series: [
+            {
+                name: '总请求数',
+                data: [{x: 1535549581766, y: 0.255385961269337},
+                    {x: 1535549582766, y: 0.522856658860768},
+                    {x: 1535549583766, y: 0.85224288300491},
+                    {x: 1535549584766, y: 0.203602150586137},
+                    {x: 1535549585766, y: 0.830985714653746},
+                    {x: 1535549586766, y: 0.648804185628615},
+                    {x: 1535549587766, y: 0.54365631703881},
+                    {x: 1535549588766, y: 0.183473493411935},
+                    {x: 1535549589766, y: 0.107250381815213},
+                    {x: 1535549590766, y: 8.674642595370756},
+                    {x: 1535549591766, y: 0.875834458275218},
+                    {x: 1535549592766, y: 0.104192236371079},
+                    {x: 1535549593766, y: 0.273510688961343},
+                    {x: 1535549594766, y: 1.698645044397763},
+                    {x: 1535549595766, y: 0.630132546505347},
+                    {x: 1535549596766, y: 0.19276234585974},
+                    {x: 1535549597766, y: 0.202379301534918},
+                    {x: 1535549598766, y: 0.888758703470918},
+                    {x: 1535549599766, y: 0.840359577742495},
+                    {x: 1535551504135, y: 0.965286133918756}]
+            }
+        ]
+    });
+</script>
+ 
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+   
+/**
+   * 获取url地址参数对象
+   */
+ function getQueryString() {
+    console.log("当前数据 window.location.search ", window.location.search);
+    // 获取url-?后参数
+    var url = window.location.search;
+    // 参数对象
+    var theRequest = new Object();
+    //获取url中"?"符后的字串
+    if (url.indexOf("?") != -1) {
+      var str = url.substr(1);
+      var strs = str.split("&");
+      for (var i = 0; i < strs.length; i++) {
+        theRequest[strs[i].split("=")[0]] = decodeURI(strs[i].split("=")[1]);
+      }
+    }
+    console.log("当前数据 theRequest ", theRequest);
+    return theRequest;
+  }
+  
+console.log(getQueryString()) //{xx:xx}
+/**
+* 跳转获取url路径
+*/
+function jumpGetUrl() {
+  let obj= getQueryString();
+  console.log("当前参数对象 obj", obj);
+  Object.keys(obj).forEach(function(key) {
+    console.log(key, obj[key]);
+    // 当前url 地址
+    if (key == "targeturl") {
+      url = obj["targeturl"] + "?";
+    } else {
+      url += `&${key}=${encodeURIComponent(obj[key])}`;
+    }
+  });
+  // 格式化地址
+  url = url.replace("?&", "?");
+  console.log("当前已实名 url ", url);
+  //跳转地址
+  location.replace(url);
+}
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-06-11 16:29:25
+ * @LastEditTime: 2020-06-14 20:51:25
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \dfyj-h5c:\Users\admin\Desktop\demo-test\time copy 2.html
+--> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+//  function getTheSame() {
+//         var attendUid = ["张三", "李四", "马六"]
+//         var dataattendUid = ["王五", "李四", "赵四","张三"]
+//         var result = new Array()
+//         var c = dataattendUid.toString()
+// console.log('当前数据 c ',  c);
+//         for (var i = 0; i < attendUid.length; i++) {
+//             if (c.indexOf(attendUid[i].toString()) > -1) {
+//                 for (var j = 0; j < dataattendUid.length; j++) {
+//                     if (attendUid[i] === dataattendUid[j]) {
+//                         result.push(attendUid[i]);
+//                         break
+//                     }
+//                 }
+//             }
+//         }
+//         console.log(result)
+//         return result
+//     }
+// getTheSame()
+// let arr1 = ["张三", "李四", "马六"]
+// let arr2 = ["张三", "李四2"]
+
+// function  getArrDifference(arr1, arr2) {
+          
+//           return arr1.concat(arr2).filter(function(v, i, arr) {
+
+//               return arr.indexOf(v) === arr.lastIndexOf(v)
+
+//           });
+
+//           }
+//        console.log('当前数据  ', getArrDifference(arr1, arr2) ); 
+
+// var newarr = [ ["Num", "A " ],["Num","B" ]];
+// let array1 = []
+// newarr.map(item =>{
+//  let obj ={}
+//  obj[item[0]] = item[1]
+//  array1.push(obj)
+// })
+// console.log('当前数据 newarr ',   array1);
+// var array2 = [ {"Num": "A " }, {"Num2": "B2"}, {"Num3": "C3 "}];
+// let array1 = [{"1591931580000": '0.13'},{"1591931580002": '0.13'}]
+// let array1 = [[1591931580000,0.13],[1591931880000,0.14]]
+// let array2 = [{p: "1.2206", m: "202006121117", r: 0.13},{p: "1.2206", m: "202006121118", r: 0.13},{p: "1.2206", m: "202006121130", r: 0.13}]
+// let arr1 = array1.flat()
+// console.log('当前数据 arr1 ',  arr1);
+// // let array2 = [{"1591931580000": '0.13'},{"1591931580002": '0.13'},{"1591931580003": '0.13'}]
+// array2.map(item =>{
+//   if (arr1.indexOf(new Date(item.m.substring(0,4)+"-"+ item.m.substring(4,6)+"-"+item.m.substring(6,8)+" "+item.m.substring(8,10)+":"+item.m.substring(10,12)+":00").getTime()) === -1) {
+//     console.log('当前数据 不存在',  111);
+//   } else {
+//     console.log('当前数据 222 ',  222);
+//   }
+// })
+// var result = [];
+// for(var i = 0; i < array2.length; i++){
+// var obj = array2[i];
+// var num = obj.Num;
+// var isExist = false;
+// for(var j = 0; j < array1.length; j++){
+// var aj = array1[j];
+// var n = aj.Num;
+// if(n == num){
+// isExist = true;
+// break;
+// }
+// }
+// if(!isExist){
+// result.push(obj);
+// }
+// }
+// console.log(result);
+ getArrDifference = (oldArr, newArr) => {
+  console.log('当前数据 newArr, oldArr ',oldArr, newArr );
+  let array1 = []
+  let array2 = []
+  newArr.map(item => {
+    item.m = new Date(item.m.substring(0,4)+"-"+ item.m.substring(4,6)+"-"+item.m.substring(6,8)+" "+item.m.substring(8,10)+":"+item.m.substring(10,12)+":00").getTime()
+  })
+
+  oldArr.map(item =>{
+
+    array1.push({
+      "m":item[0],
+      "r":item[1]
+    })
+  })
+console.log('当前数据array1 ', array1);
+console.log('当前数据newArr', newArr);
+  var result = [];
+  for (var i = 0; i < newArr.length; i++) {
+    var obj = newArr[i];
+    var num = obj.m;
+    var isExist = false;
+    for (var j = 0; j < array1.length; j++) {
+      var aj = array1[j];
+      var n = aj.m;
+      if (n == num) {
+        isExist = true;
+        break;
+      }
+    }
+    if (!isExist) {
+      result.push(obj);
+    }
+  }
+  console.log("数据不同的结果是",result);
+};
+     let arr1 = [[1591931580000,0.13],[1591931820000,0.14]]
+     let arr2 =[{p: "1.2206", m: "202006121117", r: 0.13},{p: "1.2206", m: "202006121118", r: 0.13},{p: "1.2206", m: "202006121119", r: 0.13}]
+      getArrDifference(arr1,arr2)
+
+  </script>
+</body>
+</html>

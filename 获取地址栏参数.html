@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+   
+var strHref = location.href
+function getQueryString (name) {
+  // var strHref = window.localtion.search
+  // key存在先通过search取值 如果取不到就通过hash来取
+  strHref = strHref.substr(1) || strHref.split("?")[1]
+    if (strHref) {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)")
+        var r = strHref.match(reg)
+        if (r != null) {
+            return r[2]
+        } else {
+            return null
+        }
+    }
+}
+console.log(decodeURI(getQueryString('id'))) // null
+console.log(decodeURI(getQueryString('name'))) //参数二
+console.log(decodeURI(getQueryString('targeturl'))) //参数三
+  </script>
+</body>
+</html>

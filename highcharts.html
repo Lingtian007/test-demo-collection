@@ -1,0 +1,46 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-07-01 15:37:30
+ * @LastEditTime: 2020-10-29 09:08:46
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \light-h5-3802c:\Users\admin\Desktop\demo-test\demo.html
+--> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <style>
+    div{
+      width: 200px;
+      height: 200px;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+  <div> hello world</div>
+  <script type="text/javascript" src="cefApi.min.js"></script> 
+  <script> 
+  window.API.use({ method:'util.getLoginInfoForDF', success:function(data){ alert(data); } }); 
+  </script>
+<!-- <input type="button" value="点击跳转" id="btn"/> -->
+<!-- <div id="dv"></div> -->
+<!-- <script src="./node_modules/light-sdk/dist/index.umd.js"></script>
+<script>
+      document.getElementById("btn").onclick=function () {
+        params={
+            // url:"https://fanyi.baidu.com/"
+            url:"file:///C:/Users/admin/Desktop/demo-test/time2.html"
+        };
+        LightSDK.native.openURL(params,function(res){
+            console.log(res);
+            alert(res)
+        });
+      
+  };
+</script> -->
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-23 08:56:00
+ * @LastEditTime: 2020-12-23 10:08:15
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \demo-test\H5-wx.html
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>H5跳转小程序</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable = 0"/>
+    <title>Demo</title>
+    <!-- <script th:src="@{/static/js/jquery.min.js}"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+    　<script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+
+</head>
+<body>
+<wx-open-launch-weapp
+        id="launch-btn"
+        username="gh_63265c30d361" path="/pages/nearPreferential/nearPreferential.html">
+    <!-- 这里填写跳转对于小程序的页面 注意这里的 .html -->
+    <template>
+        <style>.btn {
+            padding: 12px;
+            width: 200px;
+            height: 50px;
+        }</style>
+        <button class="btn">打开小程序</button>
+    </template>
+
+</wx-open-launch-weapp>
+</body>
+<script>
+
+    $(function () {
+        // config 的参数以及签名=
+        var url = "https://sit-aipc-wx-api.buyforyou.cn/aipc-small-api/jd/pointshop/getSignature";
+        // var url = "http://192.168.30.229:8081/aipc-small-api/jd/pointshop/getSignature?asdi=14214&klasjdl=124";
+        // $.get(url, function (response) {
+            
+            // if (response != null) {
+                // var info = response;
+                wx.config({
+                    debug: true,   //开启后
+                    // appId: info.appId,
+                    // timestamp: info.timestamp,
+                    // nonceStr: info.nonceStr,
+                    // signature: info.signature,
+                    
+                    signature: "d5ea147700e957ef2db4259aa911247c58e7061b",
+                    appId: "wxee66f8aa0eebc61b",
+                    nonceStr: "z3bLvUH7xKVDQqTk",
+                    timestamp: 1608689046,
+                    jsApiList: ["startRecord", "stopRecord", "onVoiceRecordEnd", "playVoice", "pauseVoice", "stopVoice", "onVoicePlayEnd", "uploadVoice", "downloadVoice", "chooseImage", "previewImage", "uploadImage", "downloadImage", "translateVoice", "getNetworkType", "openLocation", "getLocation"],//必须要不调用小程序标签渲染不出来
+                    openTagList: ['wx-open-launch-weapp']//必须必须要不调用小程序标签渲染不出来
+                });
+            // }
+        // });
+        //=== 获取 config 的参数以及签名=== end
+        wx.ready(function () {
+            // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中
+            console.log("res111");
+        });
+
+	    // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名
+        wx.error(function (res) {
+            console.log("res", res);
+        });
+
+        var btn = document.getElementById('launch-btn');
+        btn.addEventListener('launch', function (e) {
+            console.log('success');
+        });
+        btn.addEventListener('error', function (e) {
+            console.log('fail', e.detail);
+        });
+    });
+
+
+</script>
+</html>
